@@ -1,0 +1,363 @@
+{# это шаблон сайта #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Hermaeus Mora {% endblock %} </title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap'); /* Подключаем Roboto Mono */
+
+        body {
+            background-color: #000000;
+            color: #98ff98;
+            font-family: 'Roboto Mono', monospace; /* Используем Roboto Mono */
+            margin: 0;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            background-color: #222;
+            overflow: hidden;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: #98ff98;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover {
+            background-color: #111;
+        }
+
+        .center-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .center-image img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .category-buttons {  /* Стиль для контейнера кнопок */
+            display: flex;
+            justify-content: center;
+            margin: 10px 0;
+        }
+
+        .category-buttons a { /* Стиль для каждой кнопки */
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 0 5px;
+            background-color: #333;
+            color: #98ff98;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .category-buttons a:hover {
+            background-color: #444;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .about-us {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #333;
+            border-radius: 5px;
+        }
+
+        .about-us p { /* Стилизуем параграф внутри about-us */
+            color: #666; /* Серый цвет */
+        }
+
+        .footer {
+            text-align: center;
+            padding: 10px;
+            color: #666; /* Серый цвет */
+            font-size: 0.8em; /* Немного меньше шрифт */
+        }
+    </style>
+</head>
+<body>
+
+    {% block nav %}
+    <ul>
+        <li><a href= "/">Главная страница</a></li>
+        <li><a href= "/catalog">Каталог</a></li>
+        <li><a href= "/T-shorts">Футболки</a></li>
+        <li><a href= "/hoodie">Худи</a></li>
+        <li><a href= "/accessories">Аксессуары</a></li>
+    </ul>
+
+    {% if request.path == "/" %}
+        <div class="center-image">
+            <img src="https://i.ibb.co/HjrF70J/photo-2025-09-23-09-50-46-2.jpg" alt="Hermaeus Mora" width="450" height="350">
+        </div>
+    {% endif %}
+
+    {% if request.path == "/" %} {# Отображаем кнопки категорий только на главной #}
+        <div class="category-buttons">
+            <a href="/T-shorts">Футболки</a>
+            <a href="/hoodie">Худи</a>
+            <a href="/accessories">Аксессуары</a>
+        </div>
+
+        <div class="about-us">
+            <h2>О нас</h2>
+            <p>Мы – Hermaeus Mora, эко-бренд для тех, кто ценит индивидуальность и заботится о планете.  Наша одежда и аксессуары созданы для неформалов, которые не боятся выражать себя и выбирают осознанное потребление. Мы используем переработанные материалы и экологически чистые технологии, чтобы минимизировать наш вклад в загрязнение окружающей среды.  Присоединяйтесь к нам в создании более устойчивого будущего!</p>
+        </div>
+    {% endif %}
+
+    </div>
+
+    <footer class="footer">
+        Контакты: example@hermaeusmora.com | +7 (999) 123-45-67
+    </footer>
+
+</body>
+</html>
+
+
+
+
+    <!--<ul>
+        <li><a href="/">главная</a></if>Элементы списка
+
+        <img src="https://i.ibb.co/p6KqBX4S/photo-5350831349151430680-y-1.jpg" width="150" height="120">
+        <li><a href="/shop">Услуги</a></if>
+        <li><a href="/basket">Корзина</a></if>
+        <li><a href="/search">Поиск</a></if>
+        <li><a href="/proba">Вход в аккаунт/Регистрация</a></if>
+        -->
+    </ul>
+    {% endblock %}
+
+    {% block content %}
+
+    {% endblock %}
+    <form>
+        <label for="user">Имя</label>
+        <input type="text" name="user">
+
+        <label for ="number">Телефон</label>
+        <input type="number" name="number">
+
+        <label for ="email">Почта</label>
+        <input type="email" name="email">
+
+        <input type="submit">
+
+
+    </form>
+
+</body>
+</html>
+<ul>
+{% for item in shop %}
+{% endfor %}
+
+</ul>
+
+<style>
+.cards {
+  display: grid;
+  /* Автоматически заполняем на всю ширину grid-контейнера */
+  grid-template-columns: repeat(auto-fill, 225px);
+  width: 100%;
+  max-width: 1000px; /* Ширина grid-контейнера */
+  justify-content: center;
+  justify-items: center; /* Размещаем карточку по центру */
+  column-gap: 30px; /* Отступ между колонками */
+  row-gap: 40px; /* Отступ между рядами */
+  margin: 0 auto;
+}
+.card {
+  width: 225px;
+  min-height: 350px;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column; /* Размещаем элементы в колонку */
+  border-radius: 4px;
+  transition: 0.2s;
+  position: relative;
+}
+
+/* При наведении на карточку - меняем цвет тени */
+.card:hover {
+  box-shadow: 4px 8px 16px rgba(255, 102, 51, 0.2);
+}
+
+.card__top {
+  flex: 0 0 220px; /* Задаем высоту 220px, запрещаем расширение и сужение по высоте */
+  position: relative;
+  overflow: hidden; /* Скрываем, что выходит за пределы */
+}
+
+/* Контейнер для картинки */
+.card__image {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.card__image > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Встраиваем картинку в контейнер card__image */
+  transition: 0.2s;
+}
+
+/* При наведении - увеличиваем картинку */
+.card__image:hover > img {
+  transform: scale(1.1);
+}
+
+/* Размещаем скидку на товар относительно изображения */
+.card__label {
+  padding: 4px 8px;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: #ff6633;
+  border-radius: 4px;
+  font-weight: 400;
+  font-size: 16px;
+  color: #fff;
+}
+
+.card__bottom {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto; /* Занимаем всю оставшуюся высоту карточки */
+  padding: 10px;
+}
+
+.card__prices {
+  display: flex;
+  margin-bottom: 10px;
+  flex: 0 0 50%; /* Размещаем цены равномерно в две колонки */
+}
+
+.card__price::after {
+  content: "₽";
+  margin-left: 4px;
+  position: relative;
+}
+
+.card__price--discount {
+  font-weight: 700;
+  font-size: 19px;
+  color: #414141;
+  display: flex;
+  flex-wrap: wrap-reverse;
+}
+
+.card__price--discount::before {
+  content: "";
+  font-weight: 400;
+  font-size: 13px;
+  color: #bfbfbf;
+}
+
+.card__price--common {
+  font-weight: 400;
+  font-size: 17px;
+  color: #606060;
+  display: flex;
+  flex-wrap: wrap-reverse;
+  justify-content: flex-end;
+}
+
+.card__price--common::before {
+  content: "Обычная";
+  font-weight: 400;
+  font-size: 13px;
+  color: #bfbfbf;
+}
+
+.card__title {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 150%;
+  color: #414141;
+}
+
+.card__title:hover {
+  color: #ff6633;
+}
+
+.card__add {
+  display: block;
+  width: 100%;
+  font-weight: 400;
+  font-size: 17px;
+  color: #70c05b;
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #70c05b;
+  border-radius: 4px;
+  cursor: pointer; /* Меняем курсор при наведении */
+  transition: 0.2s;
+  margin-top: auto; /* Прижимаем кнопку к низу карточки */
+}
+
+.card__add:hover {
+  border: 1px solid #ff6633;
+  background-color: #ff6633;
+  color: #fff;
+}
+</style>
+<!-- Сетка карточек товаров -->
+<div class="cards">
+{% for item in shop %}
+<!-- Карточка товара -->
+<div class="card">
+  <!-- Верхняя часть -->
+  <div class="card__top">
+    <!-- Изображение-ссылка товара -->
+    <a href="#" class="card__image">
+      <img
+        src="{{item[4]}}"
+        alt="{{item[1]}}"
+      />
+    </a>
+
+  </div>
+  <!-- Нижняя часть -->
+  <div class="card__bottom">
+    <!-- Цены на товар (с учетом скидки и без)-->
+    <div class="card__prices">
+      <div class="card__price card__price--discount"> {{item[3]}} </div>
+    </div>
+    <!-- Ссылка-название товара -->
+    <a href="#" class="card__title">
+      {{item[1]}}
+    </a>
+  </div>
+
+</div>
+{% endfor %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Поиск{% endblock %}
+
+{% block content %}
+<h2>Результаты поиска{% if query %} по запросу "{{ query }}"{% endif %}</h2>
+
+{% if shop and shop|length > 0 %}
+    <div class="product-grid">
+        {% for item in shop %}
+        <div class="product-card">
+            <img src="{{ item[4] }}" alt="{{ item[1] }}"> {# image_url #}
+            <h3>{{ item[1] }}</h3>  {# name #}
+            <p class="price">{{ item[3] }} ₽</p> {# price #}
+            <p class="category">Категория: {{ item[7] }}</p> {# category #}
+            <a href="{{ url_for('basket', item=item[0]) }}" class="btn">В корзину</a> {# id #}
+        </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>Ничего не найдено.</p>
+{% endif %}
+{% endblock %}

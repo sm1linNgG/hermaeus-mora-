@@ -1,0 +1,234 @@
+{# это шаблон сайта #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Hermaeus Mora {% endblock %} </title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap'); /* Подключаем Roboto Mono */
+
+        body {
+            background-color: #000000;
+            color: #98ff98;
+            font-family: 'Roboto Mono', monospace; /* Используем Roboto Mono */
+            margin: 0;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            background-color: #222;
+            overflow: hidden;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: #98ff98;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover {
+            background-color: #111;
+        }
+
+        .center-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .center-image img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .category-buttons {  /* Стиль для контейнера кнопок */
+            display: flex;
+            justify-content: center;
+            margin: 10px 0;
+        }
+
+        .category-buttons a { /* Стиль для каждой кнопки */
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 0 5px;
+            background-color: #333;
+            color: #98ff98;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .category-buttons a:hover {
+            background-color: #444;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .about-us {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #333;
+            border-radius: 5px;
+        }
+
+        .about-us p { /* Стилизуем параграф внутри about-us */
+            color: #666; /* Серый цвет */
+        }
+
+        .footer {
+            text-align: center;
+            padding: 10px;
+            color: #666; /* Серый цвет */
+            font-size: 0.8em; /* Немного меньше шрифт */
+        }
+
+        /* Дополнительные стили для формы поиска */
+        .search-form input[type="text"] {
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #444;
+            background: #111;
+            color: #98ff98;
+        }
+
+        .search-form button {
+            background: #333;
+            color: #98ff98;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .search-form button:hover {
+            background: #444;
+        }
+
+        /* 🔹 Стили карточек товаров */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+            padding: 10px;
+        }
+
+        .product-card {
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            color: #98ff98;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px #98ff98;
+        }
+
+        .product-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .product-card h3 {
+            margin: 10px 0 5px;
+            font-size: 1.2em;
+        }
+
+        .product-card .price {
+            font-size: 1.1em;
+            font-weight: bold;
+            margin: 8px 0;
+        }
+
+        .product-card .category {
+            font-size: 0.9em;
+            color: #bbb;
+            margin-bottom: 10px;
+        }
+
+        .product-card .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #333;
+            color: #98ff98;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background 0.2s ease;
+        }
+
+        .product-card .btn:hover {
+            background: #444;
+        }
+    </style>
+</head>
+<body>
+
+    {% block nav %}
+    <ul>
+        <li><a href="/">Главная страница</a></li>
+        <li><a href="/catalog">Каталог</a></li>
+        <li><a href="/T-shorts">Футболки</a></li>
+        <li><a href="/hoodie">Худи</a></li>
+        <li><a href="/accessories">Аксессуары</a></li>
+    </ul>
+
+    <!-- Форма поиска и иконки действий -->
+    <div style="display: flex; gap: 20px; align-items: center; justify-content: center; margin:10px 0;">
+        <form action="{{ url_for('search') }}" method="get" class="search-form" style="margin: 0;">
+            <input type="text" name="q" placeholder="Поиск товаров..." value="{{ request.args.get('q', '') }}">
+            <button type="submit">🔍</button>
+        </form>
+        <a href="/proba" style="color: white; text-decoration: none; font-size: 16px;">👤</a>
+    </div>
+    {% endblock %}
+
+    {% if request.path == "/" %}
+        <div class="center-image">
+            <img src="https://i.ibb.co/HjrF70J/photo-2025-09-23-09-50-46-2.jpg" alt="Hermaeus Mora" width="450" height="350">
+        </div>
+    {% endif %}
+
+    {% if request.path == "/" %} {# Отображаем кнопки категорий только на главной #}
+        <div class="category-buttons">
+            <a href="/T-shorts">Футболки</a>
+            <a href="/hoodie">Худи</a>
+            <a href="/accessories">Аксессуары</a>
+        </div>
+
+        <div class="about-us">
+            <h2>О нас</h2>
+            <p>Мы – Hermaeus Mora, эко-бренд для тех, кто ценит индивидуальность и заботится о планете. Наша одежда и аксессуары созданы для неформалов, которые не боятся выражать себя и выбирают осознанное потребление. Мы используем переработанные материалы и экологически чистые технологии, чтобы минимизировать наш вклад в загрязнение окружающей среды. Присоединяйтесь к нам в создании более устойчивого будущего!</p>
+        </div>
+    {% endif %}
+
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <footer class="footer">
+        Контакты: example@hermaeusmora.com | +7 (999) 123-45-67
+    </footer>
+
+</body>
+</html>
